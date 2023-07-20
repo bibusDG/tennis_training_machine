@@ -6,8 +6,8 @@ import 'package:tennis_training_machine/models/return_hit_model.dart';
 class ReturnHitController extends GetxController{
 
   RxInt pressedBallNumber = 0.obs;
-  RxDouble newXPosition = 100.0.obs;
-  RxDouble newYPosition = 100.0.obs;
+  // RxDouble newXPosition = 100.0.obs;
+  // RxDouble newYPosition = 100.0.obs;
   RxBool positionChangeActivated = false.obs;
   RxBool tennisBallDropped = false.obs;
   RxInt hitCounter = 0.obs;
