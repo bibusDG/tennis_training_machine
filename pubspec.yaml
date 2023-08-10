@@ -39,6 +39,7 @@ dependencies:
   get:
   responsive_framework:
   get_storage:
+  flutter_blue:
 
 dev_dependencies:
   flutter_test:

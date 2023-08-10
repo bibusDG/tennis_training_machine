@@ -167,7 +167,7 @@ class TrainingSetUpPage extends StatelessWidget {
                                     openReturnHitParametersWindow(returnHitController, trainingModel, totalBallController);
                                   } else {
 
-                                    ///if on pressed area there is no ball create new hit model with new ball
+                                    ///if on pressed area there is no ball, create new hit model with new ball
                                     returnHitController.hitCounter.value ++;
 
                                     ///set ball position
