@@ -128,7 +128,7 @@ class TrainingSetUpPage extends StatelessWidget {
                   child: Center(
                     ///as ball picture must be loaded before generating screen, we use Future function
                     child: FutureBuilder(
-                      future: _loadImage('assets/images/tennis_ball.png'),
+                      future: _loadImage('assets/images/small_tennis_ball.png'),
                       builder: (BuildContext myContext, AsyncSnapshot ballImage) {
                         if (ballImage.hasData) {
                           return Container(
@@ -196,11 +196,22 @@ class TrainingSetUpPage extends StatelessWidget {
                               ///when ball is moving on the screen
                               onHorizontalDragUpdate: (details) {
                                 if (returnHitController.positionChangeActivated.value) {
-                                  // returnHitController.newXPosition.value = details.localPosition.dx;
-                                  // returnHitController.newYPosition.value = details.localPosition.dy;
-                                  ///new test
-                                  returnHitController.newHit.ballPositionX = details.localPosition.dx;
-                                  returnHitController.newHit.ballPositionY = details.localPosition.dy;
+                                  ///setting min, max value for moving ball Y axis
+                                  if(details.localPosition.dy < 20){
+                                    returnHitController.newHit.ballPositionY = 20;
+                                  }else if(details.localPosition.dy > 382.0){
+                                    returnHitController.newHit.ballPositionY = 382;
+                                  } else{
+                                    returnHitController.newHit.ballPositionY = details.localPosition.dy;
+                                  }
+                                  ///setting min, max value for moving ball X axis
+                                  if(details.localPosition.dx < 15.0){
+                                    returnHitController.newHit.ballPositionX = 15.0;
+                                  }else if(details.localPosition.dx > 343.0){
+                                    returnHitController.newHit.ballPositionX = 343.0;
+                                  } else{
+                                    returnHitController.newHit.ballPositionX = details.localPosition.dx;
+                                  }
                                   returnHitController.refreshReturnHit();
                                 }
                               },
