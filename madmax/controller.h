@@ -36,6 +36,7 @@ class MotorController {
     Stepper* getStepper(uint8_t id);
     void moveToPosition(uint8_t id, int position);
     void moveBy(uint8_t id, int steps);
+    void setStepperSpeed(uint8_t id, float speed);
 };
 
 #endif
