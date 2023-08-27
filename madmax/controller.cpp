@@ -41,14 +41,22 @@ void MotorController::moveToPosition(uint8_t id, int position) {
   stepper->getDriver()->moveTo(STEP_RESOLUTION*position);
 }
 
+void MotorController::setStepperSpeed(uint8_t id, float speed) {
+  Stepper* stepper = &this->steppers[id];
+  stepper->getDriver()->setSpeed(speed);
+}
+
 void MotorController::invalidate() {
-  AccelStepper* driver = this->steppers[LEFT_SHAFT].getDriver();
-  driver->setSpeed(400);
-  driver->runSpeedToPosition();  
+  // AccelStepper* driver = this->steppers[LEFT_SHAFT].getDriver();
+  // driver->setSpeed(400);
+  // driver->runSpeedToPosition();  
   
-  driver = this->steppers[RIGHT_SHAFT].getDriver();
-  driver->setSpeed(400);
-  driver->runSpeedToPosition();  
+  // driver = this->steppers[RIGHT_SHAFT].getDriver();
+  // driver->setSpeed(400);
+  // driver->runSpeedToPosition();
+
+  // AccelStepper* driver = this->steppers[FEEDER].getDriver();
+  // driver->runSpeed(); 
 }
 
 void MotorController::debug(Motor* motor) {

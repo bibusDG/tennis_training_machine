@@ -35,33 +35,39 @@ void setup() {
   controller->addStepper(new Stepper(RIGHT_SHAFT, 200, DIGITAL_7, DIGITAL_4));
   controller->addStepper(new Stepper(FEEDER, 200, DIGITAL_6_PWM, DIGITAL_3_PWM));
 
+  // initialize memory chunk
   for (int i = 0; i < 150; i++) {
     plan[i] = Configuration(0, 0, 0, 0, 0, 0);
   }
-  plan[0].update(0, 0, 0, 0, 0, 0);
-  plan[1].update(255, 255, 255, 255, 0, 0);
-  plan[2].update(100, 100, 255, 200, 0, 0);
-  plan[3].update(50, 50, 200, 255, 0, 0);
+
+  // plan[0].update(0, 0, 0, 0, 0, 0);
+  // plan[1].update(255, 255, 255, 255, 0, 0);
+  // plan[2].update(100, 100, 255, 200, 0, 0);
+  // plan[3].update(50, 50, 200, 255, 0, 0);
+  controller->setMotorSpeed(BOT_ROLLER, 120);
+  controller->setMotorSpeed(TOP_ROLLER, 120);  
+  //controller->setStepperSpeed(FEEDER, 400);
 }
 
 void loop() {
+
   // update counter state
   invalidateCounter(counter);
   // update limiters state
   invalidateLimiter(limiter);
 
-  if (ballCount != counter->getCount()) {
-    ballCount = counter->getCount();
-    Serial.println("balls: " + (String)ballCount);
+  // if (ballCount != counter->getCount()) {
+  //   ballCount = counter->getCount();
+  //   Serial.println("balls: " + (String)ballCount);
     
-    configuration = &plan[ballCount];
-    Serial.println(configuration->toString());
+  //   configuration = &plan[ballCount];
+  //   Serial.println(configuration->toString());
 
-    controller->setMotorSpeed(BOT_ROLLER, configuration->getBotSpeed());
-    controller->setMotorSpeed(TOP_ROLLER, configuration->getTopSpeed());
-    controller->moveToPosition(LEFT_SHAFT, configuration->getLeft());
-    controller->moveToPosition(RIGHT_SHAFT, configuration->getRight());
-  }
+  //   controller->setMotorSpeed(BOT_ROLLER, configuration->getBotSpeed());
+  //   controller->setMotorSpeed(TOP_ROLLER, configuration->getTopSpeed());
+  //   controller->moveToPosition(LEFT_SHAFT, configuration->getLeft());
+  //   controller->moveToPosition(RIGHT_SHAFT, configuration->getRight());
+  // }
   
   controller->invalidate();
 
@@ -86,6 +92,7 @@ ISR (PCINT1_vect) {
   else if (digitalRead(limiter->getPin()) == HIGH && !limiter->isUpdating() && limiter->getState()) {
     limiter->startUpdate();
   }
+  // TODO: check feeder limiter
 }
 
 void invalidateCounter(Counter* instance) {
