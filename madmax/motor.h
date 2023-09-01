@@ -31,7 +31,6 @@ class Stepper {
 
     uint8_t id;
     AccelStepper* driver;
-
     int position;
 
   public:

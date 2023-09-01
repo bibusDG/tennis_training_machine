@@ -10,7 +10,7 @@ MotorController* controller;
 Configuration* plan = new Configuration[MAX_BALLS];
 Configuration* configuration;
 
-uint8_t ballCount = 0;
+uint8_t ballCount = -1;
 
 void setup() {
 
@@ -40,13 +40,14 @@ void setup() {
     plan[i] = Configuration(0, 0, 0, 0, 0, 0);
   }
 
-  // plan[0].update(0, 0, 0, 0, 0, 0);
-  // plan[1].update(255, 255, 255, 255, 0, 0);
-  // plan[2].update(100, 100, 255, 200, 0, 0);
-  // plan[3].update(50, 50, 200, 255, 0, 0);
+  //plan[0].update(255, 255, 255, 255, 0, 0);
+  //plan[1].update(255, 255, 255, 255, 0, 0);
+  //plan[2].update(100, 100, 255, 200, 0, 0);
+  //plan[3].update(50, 50, 200, 255, 0, 0);
+  
   controller->setMotorSpeed(BOT_ROLLER, 120);
-  controller->setMotorSpeed(TOP_ROLLER, 120);  
-  //controller->setStepperSpeed(FEEDER, 400);
+  controller->setMotorSpeed(TOP_ROLLER, 120);
+  controller->move(FEEDER, 200);  
 }
 
 void loop() {
@@ -57,16 +58,16 @@ void loop() {
   invalidateLimiter(limiter);
 
   // if (ballCount != counter->getCount()) {
-  //   ballCount = counter->getCount();
-  //   Serial.println("balls: " + (String)ballCount);
+  //    ballCount = counter->getCount();
+  //    Serial.println("balls: " + (String)ballCount);
     
-  //   configuration = &plan[ballCount];
-  //   Serial.println(configuration->toString());
+  //    configuration = &plan[ballCount];
+  //    Serial.println(configuration->toString());
 
-  //   controller->setMotorSpeed(BOT_ROLLER, configuration->getBotSpeed());
-  //   controller->setMotorSpeed(TOP_ROLLER, configuration->getTopSpeed());
-  //   controller->moveToPosition(LEFT_SHAFT, configuration->getLeft());
-  //   controller->moveToPosition(RIGHT_SHAFT, configuration->getRight());
+  //    controller->setMotorSpeed(BOT_ROLLER, configuration->getBotSpeed());
+  //    controller->setMotorSpeed(TOP_ROLLER, configuration->getTopSpeed());
+  //    controller->moveToPosition(LEFT_SHAFT, configuration->getLeft());
+  //    controller->moveToPosition(RIGHT_SHAFT, configuration->getRight());
   // }
   
   controller->invalidate();
